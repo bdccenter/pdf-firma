@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="success-container">
+        <h2>¡Documento subido exitosamente!</h2>
+        <p>Comparte el siguiente enlace con la persona que debe firmar el documento:</p>
+        
+        <div class="url-container">
+            <p id="signing-url">{{ signing_url }}</p>
+        </div>
+        
+        <button class="copy-button" onclick="copyUrl()">Copiar enlace</button>
+    </div>
+{% endblock %}

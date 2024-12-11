@@ -1,0 +1,525 @@
+:root {
+    --fuente-principal: 'Roboto', sans-serif;
+    --blanco: #fff;
+    --negro: #1c1d18;
+    --rojo-nissan: #50368D;
+    --gris-claro: #f4f4f4;
+    --gris-oscuro: #333;
+    --espaciado: 1rem;
+    --transicion: 0.3s ease-in-out;
+    --primary-color: #1a73e8;
+    --secondary-color: #34a853;
+    --background-light: #f4f6f9;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+    --hover-color: #f1f3f4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    font-family: var(--fuente-principal);
+    color: var(--negro);
+    background-color: var(--gris-claro);
+    line-height: 1.6;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Header */
+.header {
+    background-color: var(--rojo-nissan);
+    color: var(--blanco);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo img {
+    height: 5.5rem;
+    width: auto;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: var(--blanco);
+    font-weight: bold;
+    transition: var(--transicion);
+}
+
+.nav ul li a:hover {
+    color: var(--gris-claro);
+    text-decoration: underline;
+}
+
+/* Contenedor App */
+.contenedor-app {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    width: 50%;
+    max-width: 100%;
+    background-color: var(--blanco);
+    padding: var(--espaciado);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.app canvas {
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    border-radius: 8px; 
+}
+
+.imagen {
+    background-image: url(../img/logo.png);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    max-width: 500px;
+    height: 20rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Estilo mejorado para input[type="file"] */
+.file-upload {
+    position: relative;
+    width: 80%;
+    max-width: 300px;
+    margin: 1rem auto;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hacemos el input invisible */
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--rojo-nissan);
+    color: var(--blanco);
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload-label:hover {
+    background-color: #d93f3f; /* Color más oscuro al pasar el cursor */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.file-upload-label:active {
+    transform: scale(0.98); /* Reducir un poco el tamaño al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload-text {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+}
+
+
+/* Estilo para el botón submit */
+button[type="submit"] {
+    background-color: var(--rojo-nissan); /* Color de fondo */
+    color: var(--blanco); /* Color del texto */
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+/* Efecto hover para el botón submit */
+button[type="submit"]:hover {
+    background-color: #d93f3f; 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-2px); 
+}
+
+/* Efecto active para el botón submit */
+button[type="submit"]:active {
+    transform: scale(0.98); 
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); 
+}
+
+/* Estilo al deshabilitar el botón */
+button[type="submit"]:disabled {
+    background-color: #cccccc; 
+    color: #666666; 
+    cursor: not-allowed; 
+    box-shadow: none; 
+}
+
+/* Estilo de los inputs */
+input {
+    width: 100%;
+    height: 2.5rem;
+    background: #50368d5e;
+    padding: 12px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+/* Efecto en el input al enfocar */
+input:focus {
+    background: #ffffff;
+    border: 2px solid #ff4c4c; /* Cambiar el color del borde al enfocar */
+    outline: none;
+}
+
+/* Estilo para el botón */
+form button {
+    background-color: var(--rojo-nissan);
+    color: var(--blanco);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Efecto hover para el botón */
+form button:hover {
+    background-color: #d93f3f; /* Color más oscuro al pasar el cursor */
+    transform: translateY(-2px); /* Elevar el botón un poco */
+}
+
+/* Efecto active para el botón */
+form button:active {
+    transform: scale(0.98); /* Reducir un poco el tamaño del botón */
+}
+
+/* Opcional: Mejora de mensajes de error o alerta */
+.messages {
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--negro);
+    color: var(--blanco);
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .contenedor-app {
+        flex-direction: column;
+        gap: var(--espaciado);
+        width: 100%;
+    }
+
+    .imagen {
+        height: 15rem;
+    }
+
+    .styled-table {
+        font-size: 14px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 10px;
+    }
+
+    .download-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+
+
+
+    .styled-table {
+        border-radius: 0;
+    }
+
+    .styled-table thead {
+        display: none;
+    }
+
+    .styled-table tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+
+    .styled-table td {
+        display: block;
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .styled-table td::before {
+        content: none;
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+
+/* Estilo para el contenedor */
+.container{
+    margin: 2rem 2rem;
+}
+
+
+/* Canvas */
+.canvas {
+    width: 100%;
+    max-width: 50rem;
+    aspect-ratio: 5/2;
+    display: block;
+    margin: 1rem auto;
+    border: 2px dashed var(--gris-oscuro);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Botones */
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.btn-primary {
+    background-color: var(--rojo-nissan);
+    color: var(--blanco);
+}
+
+.btn-primary:hover {
+    background-color: var(--gris-oscuro);
+}
+
+.btn-secondary {
+    background-color: var(--gris-oscuro);
+    color: var(--blanco);
+}
+
+.btn-secondary:hover {
+    background-color: var(--gris-claro);
+    color: var(--negro);
+}
+
+/* Estilos de pagina link */
+
+.success-container {
+    background-color: #f0f8f0;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+.url-container {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+.copy-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.copy-button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para la tabla */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.styled-table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.styled-table thead tr {
+    height: 60px;
+}
+
+.styled-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.styled-table tbody tr {
+    transition: background-color var(--transition-speed) ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: var(--background-light);
+}
+
+.styled-table tbody tr:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+    transform: scale(1.01);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.styled-table td {
+    padding: 15px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: 
+        background-color var(--transition-speed),
+        transform var(--transition-speed);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:hover {
+    background-color: #2c9d5d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
