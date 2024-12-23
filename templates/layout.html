@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Firma</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 </head>
 <body>
     <header class="header">
         <div class="logo">
-            <img src="{{ url_for('static', filename='img/logo-ai.png') }}" alt="Logo">
+            <img src="/static/img/navbar/AUTOINSIGHTS-PURPLE.png" alt="">
         </div>
         <nav class="nav">
             <ul>
@@ -17,8 +19,6 @@
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/firmados">Firmados</a></li>
                 <li><a href="/logout">Cerrar Sesión</a></li>
-                {% else %}
-                <li><a href="/login">Iniciar sesión</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -26,7 +26,16 @@
     {% block body %}{% endblock %}
     <!-- Pie de página -->
     <footer class="footer">
-        <p>&copy;Todos los derechos reservados.</p>
+        <div class="footer_logos">
+            <img width="250px" src="/static/img/footer/AUTOINSIGHTS-WHITE.png" alt="">
+            <div class="footer_mini_logos">
+                <img src="/static/img/footer/PURPLE.png" alt="">
+                <img src="/static/img/footer/LIGHT-GRAY.png" alt="">
+                <img src="/static/img/footer/DARK-GRAY.png" alt="">
+                <img src="/static/img/footer/WHITE.png" alt="">
+            </div>
+        </div>
+        <p>&copy; 2024 Auto Insights. Todos los derechos reservados.</p>
     </footer>
     <script src="{{ url_for('static', filename='js/signature.js') }}"></script>   
 </body>

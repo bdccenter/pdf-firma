@@ -1,0 +1,22 @@
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #3D2966;
+    color: var(--blanco);
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+.footer_logos{
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 42px;
+}
+.footer_mini_logos {
+    display: flex;
+    justify-content: center;
+    gap: 5.15px;
+    img {
+        width: 38px;
+        height: 38px;
+    }
+}

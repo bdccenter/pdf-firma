@@ -16,6 +16,7 @@ from flask_login import current_user
 
 # Configuración de la aplicación
 app = Flask(__name__)
+app.config["DEBUG"] = True
 
 # Configuración de carpetas de carga
 UPLOAD_FOLDER = "uploads"
@@ -310,4 +311,5 @@ with app.app_context():
     db.create_all()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+

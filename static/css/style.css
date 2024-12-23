@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Maven+Pro:wght@400..900&display=swap');
+
 :root {
-    --fuente-principal: 'Roboto', sans-serif;
+    --fuente-principal: "Maven Pro", serif;
     --blanco: #fff;
     --negro: #1c1d18;
-    --rojo-nissan: #50368D;
+    --morado-autoinsights: #3D2966;
     --gris-claro: #f4f4f4;
     --gris-oscuro: #333;
     --espaciado: 1rem;
@@ -31,40 +33,6 @@ html,body {
     display: flex;
     flex-direction: column;
 
-}
-
-/* Header */
-.header {
-    background-color: var(--rojo-nissan);
-    color: var(--blanco);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.header .logo img {
-    height: 5.5rem;
-    width: auto;
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-}
-
-.nav ul li a {
-    text-decoration: none;
-    color: var(--blanco);
-    font-weight: bold;
-    transition: var(--transicion);
-}
-
-.nav ul li a:hover {
-    color: var(--gris-claro);
-    text-decoration: underline;
 }
 
 /* Contenedor App */
@@ -261,15 +229,6 @@ form button:active {
     margin-top: 1rem;
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: var(--negro);
-    color: var(--blanco);
-    margin-top: auto;
-    font-size: 0.9rem;
-}
 
 /* Responsividad */
 @media (max-width: 768px) {
