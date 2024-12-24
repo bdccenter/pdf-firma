@@ -1,20 +1,17 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="contenedor-app">
-        <h2>Iniciar Sesión</h2>
+<div class="contenedor-app">
+    <img width="384px" height="375px" src="/static/img/logo.png" alt="">
+    <div class="formulario">
+        <h2>INICIAR SESIÓN</h2>
         <form action="{{ url_for('login') }}" method="POST">
-            <div class="form-group">
-                <label for="username">Correo Electrónico:</label>
-                <input type="email" id="username" name="username"  required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Ingresar</button>
+            <div class="form-style">
+                <input type="email" id="username" name="username" placeholder="Correo electrónico" required>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">INGRESAR</button>
+                <p>¿No tienes una cuenta? <a href="{{ url_for('register') }}"> Regístrate aquí</a>.</p>
             </div>
         </form>
-        <p>¿No tienes una cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a>.</p>
     </div>
+</div>
 {% endblock %}

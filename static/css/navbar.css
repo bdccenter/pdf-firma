@@ -32,3 +32,11 @@
     color: var(--gris-claro);
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    .header .logo img {
+        height: auto;
+        width: 50%;
+        margin-left: 0;
+    }
+}
