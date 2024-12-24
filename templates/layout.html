@@ -7,22 +7,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+    {% if current_user.is_authenticated %}
+    <header class="header-auth">
+        <div class="logo">
+            <img src="/static/img/navbar/AUTOINSIGHTS-WHITE.png" alt="">
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><i class="fa-solid fa-house"></i><a href="/">Inicio</a></li>
+                <li><i class="fa-solid fa-pen-to-square"></i><a href="/firmados">Firmados</a></li>
+                <li><i class="fa-solid fa-right-from-bracket"></i><a href="/logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% else %}
     <header class="header">
         <div class="logo">
             <img src="/static/img/navbar/AUTOINSIGHTS-PURPLE.png" alt="">
         </div>
-        <nav class="nav">
-            <ul>
-                {% if current_user.is_authenticated %}
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/firmados">Firmados</a></li>
-                <li><a href="/logout">Cerrar Sesión</a></li>
-                {% endif %}
-            </ul>
-        </nav>
     </header>
+    {% endif %}
     {% block body %}{% endblock %}
     <!-- Pie de página -->
     <footer class="footer">

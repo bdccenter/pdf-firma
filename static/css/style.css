@@ -35,8 +35,6 @@ body {
     flex-direction: column;
 
 }
-
-
 .contenedor-app {
     display: flex;
     justify-content: center;
@@ -49,37 +47,6 @@ body {
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.app canvas {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-}
-
-.imagen {
-    background-image: url(../img/logo.png);
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    max-width: 500px;
-    height: 20rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.app {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: var(--blanco);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }
 
 /* Estilo mejorado para input[type="file"] */

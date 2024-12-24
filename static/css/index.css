@@ -1,0 +1,35 @@
+.container-index {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    width: auto;
+    max-width: 100%;
+    background-color: #fff;
+    padding: 36px 96px;
+    border-radius: 10px;
+    border: #d1d1d1 1px solid;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container-index img {
+    width: 230px;
+    height: auto;
+}
+
+.app canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.app {
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}

@@ -1,43 +1,40 @@
 {% extends "layout.html" %}
 {% block body %}
-    <main class="contenedor-app">
-        <div class="imagen"></div>
-
-        <div class="app">
-            <h1>Sube tu PDF</h1>
-            <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-                <div class="file-upload">
-                    <label for="file" class="file-upload-label">
-                        <i class="fas fa-upload"></i>
-                        <span class="file-upload-text">Seleccionar Archivo</span>
-                    </label>
-                    <input type="file" id="file" name="file" accept=".pdf" required onchange="handleFileChange(event)">
-                </div>
-
-                <!-- Vista previa del archivo seleccionado -->
-                <div id="file-preview" style="display: none; margin-top: 20px; text-align: center;">
-                    Archivo seleccionado <p id="file-name" style="margin-top: 10px;"></p>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Firmar</button>
-            </form>
+<main class="container-index">
+    <img src="/static/img/logo.png" alt="">
+    <h1>Sube tu PDF</h1>
+    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <div class="file-upload">
+            <label for="file" class="file-upload-label">
+                <i class="fas fa-upload"></i>
+                <span class="file-upload-text">Seleccionar Archivo</span>
+            </label>
+            <input type="file" id="file" name="file" accept=".pdf" required onchange="handleFileChange(event)">
         </div>
-    </main>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script>
-        function handleFileChange(event) {
-            const fileInput = event.target;
-            const file = fileInput.files[0];
-            const previewContainer = document.getElementById('file-preview');
-            const fileNameElement = document.getElementById('file-name');
 
-            if (file) {
-                // Muestra la vista previa del archivo
-                fileNameElement.textContent = file.name;
-                previewContainer.style.display = 'block';
-            } else {
-                previewContainer.style.display = 'none';
-            }
+        <!-- Vista previa del archivo seleccionado -->
+        <div id="file-preview" style="display: none; margin-top: 20px; text-align: center;">
+            Archivo seleccionado <p id="file-name" style="margin-top: 10px;"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Firmar</button>
+    </form>
+</main>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    function handleFileChange(event) {
+        const fileInput = event.target;
+        const file = fileInput.files[0];
+        const previewContainer = document.getElementById('file-preview');
+        const fileNameElement = document.getElementById('file-name');
+
+        if (file) {
+            // Muestra la vista previa del archivo
+            fileNameElement.textContent = file.name;
+            previewContainer.style.display = 'block';
+        } else {
+            previewContainer.style.display = 'none';
         }
-    </script>
+    }
+</script>
 {% endblock %}
