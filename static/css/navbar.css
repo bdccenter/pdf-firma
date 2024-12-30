@@ -50,16 +50,17 @@
     text-decoration: underline;
 }
 
-.nav ul li {
-    display: flex;
+.nav ul li a {
     align-items: center;
     text-transform: uppercase;
     font-weight: normal; /* Establece el peso de la fuente como normal */
+    font-size: 20px;
+    margin-right: 42px;
 }
 
 .nav ul li i{
     color: #fff;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 @media (max-width: 768px) {

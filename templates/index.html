@@ -1,40 +1,72 @@
 {% extends "layout.html" %}
 {% block body %}
 <main class="container-index">
-    <img src="/static/img/logo.png" alt="">
-    <h1>Sube tu PDF</h1>
     <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-        <div class="file-upload">
-            <label for="file" class="file-upload-label">
-                <i class="fas fa-upload"></i>
-                <span class="file-upload-text">Seleccionar Archivo</span>
-            </label>
-            <input type="file" id="file" name="file" accept=".pdf" required onchange="handleFileChange(event)">
-        </div>
+        <div class="form-wrapper">
+            <img src="/static/img/logo.png" alt="">
+            <div class="form-container">
+                <h1>Sube tu PDF</h1>
+                <div class="form-group">
+                    <div class="file-upload" id="drop-zone"
+                        style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer;">
+                        <span class="file-upload-text">Selecciona tu archivo PDF</span>
+                        <input type="file" id="file" name="file" accept=".pdf" required style="display: none;"
+                            onchange="handleFileChange(event)">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
 
-        <!-- Vista previa del archivo seleccionado -->
-        <div id="file-preview" style="display: none; margin-top: 20px; text-align: center;">
-            Archivo seleccionado <p id="file-name" style="margin-top: 10px;"></p>
+                    <!-- Vista previa del archivo seleccionado -->
+                    
+                    <p>o arrastra y suelta el PDF aquí</p>
+                </div>
+                <div id="file-preview" style="display: none; margin-top: 20px; text-align: center;">
+                    Archivo seleccionado <p id="file-name" style="margin-top: 10px;"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Subir</button>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Firmar</button>
     </form>
 </main>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-    function handleFileChange(event) {
-        const fileInput = event.target;
-        const file = fileInput.files[0];
-        const previewContainer = document.getElementById('file-preview');
-        const fileNameElement = document.getElementById('file-name');
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file');
+    const filePreview = document.getElementById('file-preview');
+    const fileNameDisplay = document.getElementById('file-name');
 
+    // Highlight drop zone on dragover
+    dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropZone.style.borderColor = 'blue';
+    });
+
+    // Reset drop zone on dragleave
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.borderColor = '#ccc';
+    });
+
+    // Handle file drop
+    dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dropZone.style.borderColor = '#ccc';
+
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files; // Assign the dropped files to the input
+            handleFileChange({ target: fileInput }); // Trigger file change handler
+        }
+    });
+
+    // Handle file change
+    function handleFileChange(event) {
+        const file = event.target.files[0];
         if (file) {
-            // Muestra la vista previa del archivo
-            fileNameElement.textContent = file.name;
-            previewContainer.style.display = 'block';
-        } else {
-            previewContainer.style.display = 'none';
+            filePreview.style.display = 'block';
+            fileNameDisplay.textContent = file.name;
         }
     }
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
 </script>
 {% endblock %}
