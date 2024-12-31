@@ -1,0 +1,231 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <h1>Documentos Subidos</h1>
+    <!-- Documentos No Firmados -->
+    <h2>Documentos Pendientes de Firma</h2>
+    <table class="styled-table" aria-label="Lista de archivos no firmados">
+        <thead>
+            <tr>
+                <th scope="col">Alias</th>
+                <th scope="col">Nombre del Archivo</th>
+                <th scope="col">Creación</th>
+                <th scope="col">Expira</th>
+                <th scope="col">Acción</th>
+                <th scope="col">URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in unsigned_requests %}
+            <tr>
+                <td data-label="Alias">
+                    <input type="text" class="aliasname-input" placeholder="Escoge un alias...">
+                    <button class="save-alias" style="display: none;">Guardar</button>
+                </td>
+                <td data-label="Nombre del Archivo">
+                    <span class="filename-icon">📄</span>
+                    <input type="text" value="{{ request.filename }}" class="filename-input">
+                    <label for="">.pdf</label>
+                    <button class="save-filename" style="display: none;">Guardar</button>
+                </td>
+                <td data-label="Creación">
+                    <span class="filename-icon"></span>
+                    {{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}
+                </td>
+                <td data-label="Expira">
+                    <span class="filename-icon"></span>
+                    <p style="color: red;">{{ request.expires_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
+                </td>
+                <td data-label="Acción">
+                    <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
+                        style="display:inline;">
+                        <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="delete-icon">
+                                <path d="M3 6h18"></path>
+                                <path d="M10 11v6"></path>
+                                <path d="M14 11v6"></path>
+                                <path d="M17 6V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2"></path>
+                            </svg>
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    {{ request.id }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">No tienes documentos pendientes de firma.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Documentos Firmados -->
+    <h2>Documentos Firmados</h2>
+    <table class="styled-table" aria-label="Lista de archivos firmados">
+        <thead>
+            <tr>
+                <th scope="col">Alias</th>
+                <th scope="col">Nombre del Archivo</th>
+                <th scope="col">Creación</th>
+                <th scope="col">Firmado</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in signed_requests %}
+            <tr>
+                <td data-label="Alias">
+                    <input type="text">
+                </td>
+                <td data-label="Nombre del Archivo">
+                    <span class="filename-icon">📄</span>
+                    {{ request.filename }}
+                </td>
+                <td data-label="Creación">
+                    <span class="filename-icon"></span>
+                    {{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}
+                </td>
+                <td data-label="Firmado el">
+                    {% if request.signed_at %}
+                    {{ request.signed_at.strftime("%d-%B-%Y a las %H:%M") }}
+                    {% else %}
+                    No firmado
+                    {% endif %}
+                </td>
+                <td data-label="Acción">
+                    <a href="{{ url_for('download_signed_pdf', request_id=request.id) }}" class="download-btn"
+                        aria-label="Descargar {{ request.filename }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="download-icon">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Descargar
+                    </a>
+                    <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
+                        style="display:inline;">
+                        <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="delete-icon">
+                                <path d="M3 6h18"></path>
+                                <path d="M10 11v6"></path>
+                                <path d="M14 11v6"></path>
+                                <path d="M17 6V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2"></path>
+                            </svg>
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">No tienes documentos firmados aún.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>DOCUMENTOS EXPIRADOS NO FIRMADOS</h2>
+    <table class="styled-table" aria-label="Lista de archivos firmados">
+        <thead>
+            <tr>
+                <th scope="col">Alias</th>
+                <th scope="col">Nombre del Archivo</th>
+                <th scope="col">Creación</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in expired_requests %}
+            <tr>
+                <td data-label="Alias">
+                    <input type="text">
+                </td>
+                <td data-label="Nombre del Archivo">
+                    <span class="filename-icon">📄</span>
+                    {{ request.filename }}
+                </td>
+                <td data-label="Creación">
+                    <span class="filename-icon"></span>
+                    {{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}
+                </td>
+                <td data-label="Acción">
+                    <a href="{{ url_for('download_signed_pdf', request_id=request.id) }}" class="download-btn"
+                        aria-label="Descargar {{ request.filename }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="download-icon">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Descargar
+                    </a>
+                    <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
+                        style="display:inline;">
+                        <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="delete-icon">
+                                <path d="M3 6h18"></path>
+                                <path d="M10 11v6"></path>
+                                <path d="M14 11v6"></path>
+                                <path d="M17 6V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2"></path>
+                            </svg>
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">No tienes documentos firmados aún.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    // Seleccionar todos los inputs y botones
+    const inputs = document.querySelectorAll('.filename-input');
+    const saveButtons = document.querySelectorAll('.save-filename');
+
+    inputs.forEach((input, index) => {
+        const originalValue = input.value; // Guardar el valor original
+        const saveButton = saveButtons[index]; // Asociar el botón correspondiente
+
+        // Detectar cambios en el input
+        input.addEventListener('input', function () {
+            if (input.value !== originalValue) {
+                saveButton.style.display = 'inline-block'; // Mostrar el botón si el valor cambió
+            } else {
+                saveButton.style.display = 'none'; // Ocultar el botón si no hay cambios
+            }
+        });
+    });
+
+    const aliasInputs = document.querySelectorAll('.aliasname-input');
+    const saveAliasButtons = document.querySelectorAll('.save-alias');
+    aliasInputs.forEach((input, index) => {
+        const originalValue = input.value; // Guardar el valor original
+        const saveButton = saveAliasButtons[index]; // Asociar el botón correspondiente
+
+        // Detectar cambios en el input
+        input.addEventListener('input', function () {
+            if (input.value !== originalValue) {
+                saveButton.style.display = 'inline-block'; // Mostrar el botón si el valor cambió
+            } else {
+                saveButton.style.display = 'none'; // Ocultar el botón si no hay cambios
+            }
+        });
+    });
+</script>
+{% endblock %}

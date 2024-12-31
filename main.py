@@ -12,6 +12,7 @@ from flask import flash
 from dotenv import load_dotenv
 from functions import create_signature_image, add_signature_to_pdf
 from flask_login import current_user
+from sqlalchemy import or_
 
 
 # Configuración de la aplicación
@@ -138,26 +139,34 @@ def logout():
 def index():
     return render_template('index.html')
 
-@app.route('/firmados')
+@app.route('/documentos')
 @login_required
 def list_signed_documents():
-    # Documentos firmados por el usuario actual
+    # Documentos documentos por el usuario actual
     signed_requests = SignatureRequest.query.filter_by(
         is_signed=True, 
         user_id=current_user.id
     ).all()
 
-    # Documentos no firmados por el usuario actual
-    unsigned_requests = SignatureRequest.query.filter_by(
-        is_signed=False, 
-        user_id=current_user.id
+    # Documentos no documentos por el usuario actual
+    unsigned_requests = SignatureRequest.query.filter(
+    SignatureRequest.is_signed == False,
+    SignatureRequest.user_id == current_user.id,
+    or_(SignatureRequest.expires_at >= datetime.now(), SignatureRequest.expires_at.is_(None))
+    ).all()
+
+    expired_requests = SignatureRequest.query.filter(
+        SignatureRequest.is_signed == False,
+        SignatureRequest.user_id == current_user.id,
+        SignatureRequest.expires_at < datetime.now()  # Fecha de expiración pasada
     ).all()
 
     # Renderizar la plantilla con ambas listas
     return render_template(
-        'firmados.html',
+        'documentos.html',
         signed_requests=signed_requests,
-        unsigned_requests=unsigned_requests
+        unsigned_requests=unsigned_requests,
+        expired_requests=expired_requests
     )
 @app.route('/upload', methods=['POST'])
 @login_required
@@ -278,23 +287,20 @@ def download_signed_pdf(request_id):
         mimetype="application/pdf"
     )
 
-#Ruta para eliminar pdf de la base de datos
 @app.route('/delete/<request_id>', methods=['POST'])
 @login_required
 def delete_signed_pdf(request_id):
+    # Obtener la solicitud de firma por ID
     signature_request = SignatureRequest.query.get_or_404(request_id)
 
-    # Verificar si el PDF está firmado
-    if not signature_request.is_signed or not signature_request.signed_pdf:
-        return "El PDF no está firmado o no existe.", 404
-
-    # Eliminar el PDF de la base de datos
-    signature_request.signed_pdf = None
-    signature_request.is_signed = False  # Si quieres también actualizar el estado
+    # Eliminar la solicitud de la base de datos
+    db.session.delete(signature_request)
     db.session.commit()
 
-    # Redirigir a la lista de documentos firmados
-    return redirect(url_for('firmados'))
+    # Redirigir a la lista de documentos
+    flash("El documento ha sido eliminado exitosamente.", "success")  # Mensaje opcional
+    return redirect('/documentos')    # Cambia 'documentos' al endpoint correcto
+
 
 @app.route('/uploads/<filename>')
 @login_required
