@@ -1,5 +1,6 @@
 .container {
-    margin: 2rem 2rem;
+    padding: 50px 60px;
+    text-align: center;
 }
 
 .styled-table {
@@ -13,7 +14,7 @@
 }
 
 .styled-table thead {
-    background-color: var(--primary-color);
+    background-color: #7457B0;
     color: white;
 }
 
@@ -52,7 +53,149 @@
     font-size: 0.95rem;
 }
 
+.styled-table tbody td .btn-save {
+    background-color: rgb(147, 147, 241);
+    color: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    border: 1px solid rgb(147, 147, 241);
+}
 
+.styled-table tbody td .btn-save:hover {
+    background-color: rgb(110, 110, 168);
+    color: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    border: 1px solid rgb(65, 65, 165);
+    cursor: pointer;
+}
+
+.styled-table tbody td .editname-input {
+    width: auto;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #EFEFEF;
+    border: 1px solid #9b83ac;
+    height: 40px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition:
+        background-color var(--transition-speed),
+        transform var(--transition-speed);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    gap: 10px;
+}
+
+.download-btn:hover {
+    background-color: #2c9d5d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background-color: #B72323;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    transition:
+        background-color var(--transition-speed),
+        transform var(--transition-speed);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    gap: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #9b1b1b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.delete-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.styled-table tbody td .truncated-text {
+    display: inline-block;
+    max-width: 150px; /* Ajusta el ancho máximo según tus necesidades */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle; /* Alinea con el botón */
+}
+
+.styled-table tbody td .urls {
+    display: flex;
+    align-items: center;
+}
+
+.styled-table tbody td .url-container {
+    display: flex;
+    background-color: #b6b6b6;
+    border-radius: 5px;
+    border: 1px solid #888888;
+    width: auto;
+    align-items: center;
+}
+
+.styled-table tbody td .copy-btn {
+    border: 1px solid #757575;
+    background-color: #949494;
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.styled-table tbody td .copy-btn:hover {
+    border: 1px solid #727272;
+    background-color: #9c9c9c;
+}
+
+.styled-table tbody td .creation-date {
+    color: #0a90ce;
+    font-weight: bold;
+}
+
+.styled-table tbody td .expired-date {
+    color: #b41111;
+    font-weight: bold;
+}
+
+.styled-table tbody td .signed-date {
+    color: #1a9238;
+    font-weight: bold;
+}
+
+.container h2 {
+    text-transform: uppercase;
+}
+
+.container h1 {
+    font-size: 40px;
+    color: var(--morado-autoinsights);
+    margin-bottom: 20px;
+}
 
 @media (max-width: 768px) {
 
