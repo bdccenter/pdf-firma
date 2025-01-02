@@ -1,6 +1,6 @@
 .container {
     padding: 50px 60px;
-    text-align: center;
+    align-items: center;
 }
 
 .styled-table {
@@ -71,7 +71,7 @@
 }
 
 .styled-table tbody td .editname-input {
-    width: auto;
+    max-width: 100%;
     padding: 5px 10px;
     border-radius: 10px;
     background-color: #EFEFEF;
@@ -138,11 +138,13 @@
 
 .styled-table tbody td .truncated-text {
     display: inline-block;
-    max-width: 150px; /* Ajusta el ancho máximo según tus necesidades */
+    max-width: 150px;
+    /* Ajusta el ancho máximo según tus necesidades */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    vertical-align: middle; /* Alinea con el botón */
+    vertical-align: middle;
+    /* Alinea con el botón */
 }
 
 .styled-table tbody td .urls {
@@ -195,6 +197,7 @@
     font-size: 40px;
     color: var(--morado-autoinsights);
     margin-bottom: 20px;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
