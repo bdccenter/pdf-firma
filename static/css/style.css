@@ -199,11 +199,6 @@ form button:active {
     .imagen {
         height: 15rem;
     }
-
-    .download-btn {
-        width: 100%;
-        padding: 12px;
-    }
 }
 
 

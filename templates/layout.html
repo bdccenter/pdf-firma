@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Firma</title>
+    <link rel="icon" href="/static/img/icon-autoinsights.png" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
@@ -12,13 +14,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/documentos.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
     {% if current_user.is_authenticated %}
     <header class="header-auth">
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
         <div class="logo">
             <a href="/"><img src="/static/img/navbar/AUTOINSIGHTS-WHITE.png" alt="logo"></a>
         </div>
-        <nav class="nav">
+        <nav class="nav" id="nav-menu">
             <ul>
                 <li><i class="fa-solid fa-house"></i><a href="/">Inicio</a></li>
                 <li><i class="fa-solid fa-pen-to-square"></i><a href="/documentos">Documentos</a></li>
@@ -47,6 +53,27 @@
         </div>
         <p>&copy; 2024 Auto Insights. Todos los derechos reservados.</p>
     </footer>
-    <script src="{{ url_for('static', filename='js/signature.js') }}"></script>   
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            var navMenu = document.getElementById('nav-menu');
+            var menuIcon = document.querySelector('#menu-toggle i');
+
+            navMenu.classList.toggle('active');
+
+            // Cambiar el ícono entre hamburguesa y cruz
+            if (navMenu.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');  // Icono de cruz
+            } else {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');  // Icono de hamburguesa
+            }
+        });
+
+    </script>
+
+    <script src="{{ url_for('static', filename='js/signature.js') }}"></script>
+
 </body>
+
 </html>

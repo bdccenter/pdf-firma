@@ -312,6 +312,14 @@ def uploaded_file(filename):
     
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
+@app.route('/update-filename', methods=['POST'])
+def update_filename():
+    data = request.get_json()
+    file_id = data.get('id')
+    new_filename = data.get('filename')
+    # AGREGAR LOGICA PARA ACTUALIZAR EL NOMBRE DEL ARCHIVO EN LA BASE DE DATOS
+    return redirect('/documentos')
+
 # Inicialización de la base de datos
 with app.app_context():
     db.create_all()

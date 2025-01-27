@@ -1,7 +1,7 @@
 .container {
     padding: 50px 60px;
     align-items: center;
-}
+} /* .container */
 
 .styled-table {
     width: 100%;
@@ -11,16 +11,16 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-}
+} /* .styled-table */
 
 .styled-table thead {
     background-color: #7457B0;
     color: white;
-}
+} /* .styled-table thead */
 
 .styled-table thead tr {
     height: 60px;
-}
+} /* .styled-table thead tr */
 
 .styled-table th {
     padding: 15px;
@@ -29,46 +29,47 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-size: 0.9rem;
-}
+} /* .styled-table th */
 
 .styled-table tbody tr {
     transition: background-color var(--transition-speed) ease;
     border-bottom: 1px solid var(--border-color);
-}
+} /* .styled-table tbody tr */
 
 .styled-table tbody tr:nth-of-type(even) {
     background-color: var(--background-light);
-}
+} /* .styled-table tbody tr:nth-of-type(even) */
 
 .styled-table tbody tr:hover {
     background-color: var(--hover-color);
     cursor: pointer;
     transform: scale(1.01);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
+} /* .styled-table tbody tr:hover */
 
 .styled-table td {
     padding: 15px;
     color: var(--text-color);
     font-size: 0.95rem;
-}
+} /* .styled-table td */
 
 .styled-table tbody td .btn-save {
-    background-color: rgb(147, 147, 241);
+    background-color: #7457B0;
     color: white;
     border-radius: 15px;
     padding: 5px 10px;
     border: 1px solid rgb(147, 147, 241);
-}
+    text-transform: uppercase;
+} /* .styled-table tbody td .btn-save */
 
 .styled-table tbody td .btn-save:hover {
-    background-color: rgb(110, 110, 168);
+    background-color: #9373d1;
     color: white;
     border-radius: 15px;
     padding: 5px 10px;
-    border: 1px solid rgb(65, 65, 165);
+    border: 1px solid rgb(96, 96, 151);
     cursor: pointer;
-}
+} /* .styled-table tbody td .btn-save:hover */
 
 .styled-table tbody td .editname-input {
     max-width: 100%;
@@ -77,7 +78,7 @@
     background-color: #EFEFEF;
     border: 1px solid #9b83ac;
     height: 40px;
-}
+} /* .styled-table tbody td .editname-input */
 
 .download-btn {
     display: inline-flex;
@@ -94,18 +95,18 @@
         transform var(--transition-speed);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     gap: 10px;
-}
+} /* .download-btn */
 
 .download-btn:hover {
     background-color: #2c9d5d;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+} /* .download-btn:hover */
 
 .download-btn:active {
     transform: translateY(1px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
+} /* .download-btn:active */
 
 .delete-btn {
     display: inline-flex;
@@ -123,18 +124,18 @@
         transform var(--transition-speed);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     gap: 10px;
-}
+} /* .delete-btn */
 
 .delete-btn:hover {
     background-color: #9b1b1b;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+} /* .delete-btn:hover */
 
 .delete-btn:active {
     transform: translateY(1px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
+} /* .delete-btn:active */
 
 .styled-table tbody td .truncated-text {
     display: inline-block;
@@ -145,12 +146,12 @@
     white-space: nowrap;
     vertical-align: middle;
     /* Alinea con el botón */
-}
+} /* .styled-table tbody td .truncated-text */
 
 .styled-table tbody td .urls {
     display: flex;
     align-items: center;
-}
+} /* .styled-table tbody td .urls */
 
 .styled-table tbody td .url-container {
     display: flex;
@@ -159,7 +160,7 @@
     border: 1px solid #888888;
     width: auto;
     align-items: center;
-}
+} /* .styled-table tbody td .url-container */
 
 .styled-table tbody td .copy-btn {
     border: 1px solid #757575;
@@ -167,51 +168,76 @@
     padding: 5px 5px;
     border-radius: 5px;
     margin-right: 10px;
-}
+} /* .styled-table tbody td .copy-btn */
 
 .styled-table tbody td .copy-btn:hover {
     border: 1px solid #727272;
     background-color: #9c9c9c;
-}
+} /* .styled-table tbody td .copy-btn:hover */
 
 .styled-table tbody td .creation-date {
     color: #0a90ce;
     font-weight: bold;
-}
+} /* .styled-table tbody td .creation-date */
 
 .styled-table tbody td .expired-date {
     color: #b41111;
     font-weight: bold;
-}
+} /* .styled-table tbody td .expired-date */
 
 .styled-table tbody td .signed-date {
     color: #1a9238;
     font-weight: bold;
-}
+} /* .styled-table tbody td .signed-date */
 
 .container h2 {
     text-transform: uppercase;
-}
+} /* .container h2 */
 
 .container h1 {
     font-size: 40px;
     color: var(--morado-autoinsights);
     margin-bottom: 20px;
     text-align: center;
-}
+} /* .container h1 */
 
 @media (max-width: 768px) {
-
-    .styled-table {
-        font-size: 14px;
+    .container {
+        padding: 50px 20px;
     }
 
-    .styled-table th,
-    .styled-table td {
-        padding: 10px;
+    .container h1 {
+        font-size: 35px;
+        text-align: left;
+        text-decoration: underline;
+    }
+
+    .container h2 {
+        font-size: large;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        padding: 0px;
+        
+    }
+    .action-document-options {
+        display: flex;
+        flex: auto;
+    }
+    .action-document-options .download-btn {
+        display: none;
+    }
+
+    .documents-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100%;
     }
 }
 
+/*
 @media (max-width: 480px) {
 
     .styled-table {
@@ -220,21 +246,21 @@
 
     .styled-table thead {
         display: none;
-    }
+    } 
 
     .styled-table tr {
         display: block;
         margin-bottom: 10px;
         border: 1px solid var(--border-color);
         border-radius: 8px;
-    }
+    } 
 
     .styled-table td {
         display: block;
         text-align: right;
         padding-left: 50%;
         position: relative;
-    }
+    } 
 
     .styled-table td::before {
         content: none;
@@ -245,5 +271,6 @@
         white-space: nowrap;
         text-align: left;
         font-weight: bold;
-    }
+    } 
 }
+*/

@@ -4,175 +4,184 @@
     <h1>Documentos Subidos</h1>
     <div>
         <h2>Documentos Pendientes de Firma</h2>
-        <table class="styled-table" aria-label="Lista de archivos no firmados">
-            <thead>
-                <tr>
-                    <th scope="col">Alias</th>
-                    <th scope="col">Nombre del Archivo</th>
-                    <th scope="col">Creación</th>
-                    <th scope="col">Expira</th>
-                    <th scope="col">Acción</th>
-                    <th scope="col">URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for request in unsigned_requests %}
-                <tr>
-                    <td data-label="Alias">
-                        <input type="text" class="aliasname-input editname-input" placeholder="Escoge un alias...">
-                        <button class="save-alias btn-save" style="display: none;">Guardar</button>
-                    </td>
-                    <td data-label="Nombre del Archivo">
-                        <span class="filename-icon">📄</span>
-                        <input type="text" value="{{ request.filename[:-4] }}" class="filename-input editname-input">
-                        <label for="">.pdf</label>
-                        <button class="save-filename btn-save" style="display: none;">Guardar</button>
-                    </td>
-                    <td data-label="Creación">
-                        <span class="filename-icon"></span>
-                        <p class="creation-date">{{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
-                    </td>
-                    <td data-label="Expira">
-                        <span class="filename-icon"></span>
-                        <p class="expired-date">{{ request.expires_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
-                    </td>
-                    <td data-label="Acción">
-                        <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
-                            style="display:inline;">
-                            <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
-                                <i class="fa-solid fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
-                    <td class="urls">
-                        <div class="url-container">
-                            <button class="copy-btn" title="Copiar">
-                                <i class="fa-solid fa-clipboard" style="color: #535353;"></i>
-                            </button>
-                            <span class="base-url"></span><span class="truncated-text">/sign/{{ request.id }}</span>
-                        </div>
-                    </td>
+        <div class="documents-container">
+            <table class="styled-table" aria-label="Lista de archivos no firmados">
+                <thead>
+                    <tr>
+                        <th scope="col">Alias</th>
+                        <th scope="col">Nombre del Archivo</th>
+                        <th scope="col">Creación</th>
+                        <th scope="col">Expira</th>
+                        <th scope="col">Acción</th>
+                        <th scope="col">URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in unsigned_requests %}
+                    <tr>
+                        <td data-label="Alias">
+                            <input type="text" class="aliasname-input editname-input" placeholder="Escoge un alias...">
+                            <button class="save-alias btn-save" style="display: none;">Guardar</button>
+                        </td>
+                        <td data-label="Nombre del Archivo">
+                            <span class="filename-icon">📄</span>
+                            <input type="text" value="{{ request.filename[:-4] }}" data-request-id="{{ request.id }}"
+                                class="filename-input editname-input">
+                            <label for="">.pdf</label>
+                            <button class="save-filename btn-save" style="display: none;">Guardar</button>
+                        </td>
+                        <td data-label="Creación">
+                            <span class="filename-icon"></span>
+                            <p class="creation-date">{{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
+                        </td>
+                        <td data-label="Expira">
+                            <span class="filename-icon"></span>
+                            <p class="expired-date">{{ request.expires_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
+                        </td>
+                        <td data-label="Acción" class="action-document-option">
+                            <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
+                                style="display:inline;">
+                                <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                        <td class="urls">
+                            <div class="url-container">
+                                <button class="copy-btn" title="Copiar">
+                                    <i class="fa-solid fa-clipboard" style="color: #535353;"></i>
+                                </button>
+                                <span class="base-url"></span><span class="truncated-text">/sign/{{ request.id }}</span>
+                            </div>
+                        </td>
 
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="2">No tienes documentos pendientes de firma.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2">No tienes documentos pendientes de firma.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <!-- Documentos Firmados -->
         <h2>Documentos Firmados</h2>
-        <table class="styled-table" aria-label="Lista de archivos firmados">
-            <thead>
-                <tr>
-                    <th scope="col">Alias</th>
-                    <th scope="col">Nombre del Archivo</th>
-                    <th scope="col">Creación</th>
-                    <th scope="col">Firmado</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for request in signed_requests %}
-                <tr>
-                    <td data-label="Alias">
-                        <input type="text" class="aliasname-input editname-input" placeholder="Escoge un alias...">
-                        <button class="save-alias btn-save" style="display: none;">Guardar</button>
-                    </td>
-                    <td data-label="Nombre del Archivo">
-                        <span class="filename-icon">📄</span>
-                        <input type="text" value="{{ request.filename[:-4] }}" class="filename-input editname-input">
-                        <label for="">.pdf</label>
-                        <button class="save-filename btn-save" style="display: none;">Guardar</button>
-                    </td>
-                    <td data-label="Creación">
-                        <span class="filename-icon"></span>
-                        <p class="creation-date">{{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
-                    </td>
-                    <td data-label="Firmado el">
-                        <p class="signed-date">
-                            {% if request.signed_at %}
-                            {{ request.signed_at.strftime("%d-%B-%Y a las %H:%M") }}
-                            {% else %}
-                            No firmado
-                            {% endif %}
-                        </p>
-                    </td>
-                    <td data-label="Acción">
-                        <a href="{{ url_for('download_signed_pdf', request_id=request.id) }}" class="download-btn"
-                            aria-label="Descargar {{ request.filename }}">
-                            <i class="fa-solid fa-download"></i>
-                            Descargar
-                        </a>
-                        <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
-                            style="display:inline;">
-                            <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
-                                <i class="fa-solid fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="2">No tienes documentos firmados aún.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="documents-container">
+            <table class="styled-table" aria-label="Lista de archivos firmados">
+                <thead>
+                    <tr>
+                        <th scope="col">Alias</th>
+                        <th scope="col">Nombre del Archivo</th>
+                        <th scope="col">Creación</th>
+                        <th scope="col">Firmado</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in signed_requests %}
+                    <tr>
+                        <td data-label="Alias">
+                            <input type="text" class="aliasname-input editname-input" placeholder="Escoge un alias...">
+                            <button class="save-alias btn-save" style="display: none;">Guardar</button>
+                        </td>
+                        <td data-label="Nombre del Archivo">
+                            <span class="filename-icon">📄</span>
+                            <input type="text" value="{{ request.filename[:-4] }}"
+                                class="filename-input editname-input">
+                            <label for="">.pdf</label>
+                            <button class="save-filename btn-save" style="display: none;">Guardar</button>
+                        </td>
+                        <td data-label="Creación">
+                            <span class="filename-icon"></span>
+                            <p class="creation-date">{{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
+                        </td>
+                        <td data-label="Firmado el">
+                            <p class="signed-date">
+                                {% if request.signed_at %}
+                                {{ request.signed_at.strftime("%d-%B-%Y a las %H:%M") }}
+                                {% else %}
+                                No firmado
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td data-label="Acción" class="action-document-option">
+                            <a href="{{ url_for('download_signed_pdf', request_id=request.id) }}" class="download-btn"
+                                aria-label="Descargar {{ request.filename }}">
+                                <i class="fa-solid fa-download"></i>
+                                Descargar
+                            </a>
+                            <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
+                                style="display:inline;">
+                                <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2">No tienes documentos firmados aún.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <h2>DOCUMENTOS EXPIRADOS NO FIRMADOS</h2>
-        <table class="styled-table" aria-label="Lista de archivos firmados">
-            <thead>
-                <tr>
-                    <th scope="col">Alias</th>
-                    <th scope="col">Nombre del Archivo</th>
-                    <th scope="col">Creación</th>
-                    <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for request in expired_requests %}
-                <tr>
-                    <td data-label="Alias">
-                        <input type="text" class="aliasname-input editname-input" placeholder="Escoge un alias...">
-                        <button class="save-alias btn-save" style="display: none;">Guardar</button>
-                    </td>
-                    <td data-label="Nombre del Archivo">
-                        <span class="filename-icon">📄</span>
-                        <input type="text" value="{{ request.filename[:-4] }}" class="filename-input editname-input">
-                        <label for="">.pdf</label>
-                        <button class="save-filename btn-save" style="display: none;">Guardar</button>
-                    </td>
-                    <td data-label="Creación">
-                        <span class="filename-icon"></span>
-                        <p class="creation-date">{{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
-                    </td>
-                    <td data-label="Acción">
-                        <a href="{{ url_for('download_signed_pdf', request_id=request.id) }}" class="download-btn"
-                            aria-label="Descargar {{ request.filename }}">
-                            <i class="fa-solid fa-download"></i>
-                            Descargar
-                        </a>
-                        <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
-                            style="display:inline;">
-                            <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
-                                <i class="fa-solid fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="2">No tienes documentos firmados aún.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="documents-container">
+            <table class="styled-table" aria-label="Lista de archivos firmados">
+                <thead>
+                    <tr>
+                        <th scope="col">Alias</th>
+                        <th scope="col">Nombre del Archivo</th>
+                        <th scope="col">Creación</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in expired_requests %}
+                    <tr>
+                        <td data-label="Alias">
+                            <input type="text" class="aliasname-input editname-input" placeholder="Escoge un alias...">
+                            <button class="save-alias btn-save" style="display: none;">Guardar</button>
+                        </td>
+                        <td data-label="Nombre del Archivo">
+                            <span class="filename-icon">📄</span>
+                            <input type="text" value="{{ request.filename[:-4] }}"
+                                class="filename-input editname-input">
+                            <label for="">.pdf</label>
+                            <button class="save-filename btn-save" style="display: none;">Guardar</button>
+                        </td>
+                        <td data-label="Creación">
+                            <span class="filename-icon"></span>
+                            <p class="creation-date">{{ request.created_at.strftime("%d-%B-%Y a las %H:%M") }}</p>
+                        </td>
+                        <td data-label="Acción" class="action-document-option">
+                            <a href="{{ url_for('download_signed_pdf', request_id=request.id) }}" class="download-btn"
+                                aria-label="Descargar {{ request.filename }}">
+                                <i class="fa-solid fa-download"></i>
+                                Descargar
+                            </a>
+                            <form action="{{ url_for('delete_signed_pdf', request_id=request.id) }}" method="POST"
+                                style="display:inline;">
+                                <button type="submit" class="delete-btn" aria-label="Eliminar {{ request.filename }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2">No tienes documentos firmados aún.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <script>
@@ -205,18 +214,45 @@
     const saveButtons = document.querySelectorAll('.save-filename');
 
     inputs.forEach((input, index) => {
-        const originalValue = input.value; // Guardar el valor original
-        const saveButton = saveButtons[index]; // Asociar el botón correspondiente
+        const originalValue = input.value;
+        const saveButton = saveButtons[index];
 
         // Detectar cambios en el input
         input.addEventListener('input', function () {
             if (input.value !== originalValue) {
-                saveButton.style.display = 'inline-block'; // Mostrar el botón si el valor cambió
+                saveButton.style.display = 'inline-block'; // Mostrar el botón si hay cambios
             } else {
                 saveButton.style.display = 'none'; // Ocultar el botón si no hay cambios
             }
         });
+
+        // Evento para guardar los cambios
+        saveButton.addEventListener('click', async function () {
+            const requestId = input.getAttribute('data-request-id');
+            const newValue = input.value;
+
+            try {
+                const response = await fetch('/update-filename', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: requestId, filename: newValue }),
+                });
+
+                if (response.ok) {
+                    alert('Nombre del archivo guardado correctamente.');
+                    saveButton.style.display = 'none'; // Ocultar botón tras guardar
+                } else {
+                    alert('Error al guardar el nombre del archivo.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al guardar el nombre del archivo.');
+            }
+        });
     });
+
 
     const aliasInputs = document.querySelectorAll('.aliasname-input');
     const saveAliasButtons = document.querySelectorAll('.save-alias');
